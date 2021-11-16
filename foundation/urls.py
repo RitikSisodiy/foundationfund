@@ -20,10 +20,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('dashboard/', include('superuser.urls')),
     path('about/', include('about.urls')),
     path('blogs/', include('blogs.urls')),
     path('couses/', include('couses.urls')),
     path('events/', include('events.urls')),
     path('gallary/', include('gallary.urls')),
     path('shop/', include('shop.urls')),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
