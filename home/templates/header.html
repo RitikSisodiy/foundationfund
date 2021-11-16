@@ -55,26 +55,33 @@
               <a class="menuzord-brand pull-left flip" href="{% static 'index-mp-layout1.html' %} "><img
                   src="{% static 'images/logo-wide.png' %} " alt=""></a>
               <ul class="menuzord-menu">
-                <li class="active"><a href=" {% url 'index' %}">Home</a>
+                {% url 'index' as indexurl %}
+                <li class="{% if indexurl == request.path %}active{% endif %}"><a href="{{indexurl}} ">Home</a>
                 </li>
-                <li><a href="#">About us</a>
+                {% url 'about' as abouturl %}
+                {% url 'volunteer' as volunteerurl %}
+                {% url 'job' as joburl %}
+
+                <li class="{% if abouturl == request.path or volunteerurl == request.path or joburl == request.path  %}active{% endif %}"><a href="#">About us</a>
                   <ul class="dropdown">
-                    <li><a href="{% url "about" %} "> About </a></li>
-                    <li><a href="{% url "volunteer" %} "> Volunteer </a></li>
-                    <li><a href="{% url "job" %} "> Job </a></li>
-                    
-                    
+                    <li><a href= "{{abouturl}}"> About </a></li>
+                    <li><a href="{{volunteerurl}}"> Volunteer </a></li>
+                    <li><a href="{{joburl}} "> Job </a></li>
                   </ul>
                 </li>
-                <li><a href="{% url "gallary" %}">Gallary</a>
+                {% url 'gallary' as gallaryurl %}
+                <li class="{% if gallaryurl == request.path %}active{% endif %}"><a href="{{gallaryurl}}">Gallary</a>
               
                 </li>
-                <li><a href="{% url 'events' %}">Events</a>
+                {% url 'events' as eventsurl %}
+                <li class="{% if eventsurl == request.path %}active{% endif %}"><a href="{{eventsurl}}">Events</a>
                   
                 </li>
-                <li><a href="{% url 'blogs' %}">Blog</a>
+                {% url 'blogs' as blogsurl %}
+                <li class="{% if blogsurl == request.path %}active{% endif %}"><a href="{{blogsurl}}">Blog</a>
                 </li>
-                <li><a href="{% url 'couses' %}">Couses</a>
+                {% url 'couses' as cousesurl %}
+                <li class="{% if cousesurl == request.path %}active{% endif %}"><a href="{{cousesurl}}">Couses</a>
                 </li>
                 <li><a href="#">Mega Menu</a>
                   <div class="megamenu">
@@ -145,7 +152,8 @@
                     </div>
                   </div>
                 </li>
-                <li><a href="{% url 'shop' %}">shop</a>
+                {% url 'shop' as shopurl %}
+                <li class="{% if shopurl == request.path %}active{% endif %}"><a href="{{shopurl}}">shop</a>
                  
                 </li>
               </ul>
