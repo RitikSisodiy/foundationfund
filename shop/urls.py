@@ -4,5 +4,6 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', views.shops , name="shop"),
+    path('<slug:slug>/', views.shops , name="singleshop"),
 ]
