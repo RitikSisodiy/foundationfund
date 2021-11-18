@@ -1,5 +1,6 @@
 {% extends 'basic.html' %}
 {% load static %}
+{% load custumfilter %}
 {% block body %}
    <!-- Start main-content -->
    <div class="main-content">
@@ -11,7 +12,7 @@
        <div class="row">
         <div class="col-md-12">
          <h3 class="title text-white">
-          Single Cause
+          {{couse.title}}
          </h3>
         </div>
        </div>
@@ -25,7 +26,7 @@
        <div class="col-sm-8 col-md-8 col-lg-8 slide">
         <div class="causes bg-white maxwidth500 mb-30">
          <div class="thumb">
-          <img alt="" class="img-fullwidth" src=" {% static 'images/project/single-cause.jpg' %} "/>
+          <img alt="" class="img-fullwidth" src="{{couse.img.url}}"/>
           <div class="overlay-donate-now">
            <a class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left mt-10" href=" {% static 'page-donate.html' %} ">
             Donate
@@ -36,7 +37,7 @@
          </div>
          <div class="progress-item mt-0">
           <div class="progress mb-0">
-           <div class="progress-bar" data-percent="84">
+           <div class="progress-bar" data-percent="{{couse.target|getpercent:couse.raised}}">
             <span class="percent">
              0
             </span>
@@ -45,17 +46,17 @@
          </div>
          <div class="causes-details clearfix border-bottom-theme-color-1px p-15 pt-10 pb-10">
           <h5 class="font-weight-600 font-16">
-           <a href=" {% static 'page-single-cause.html' %} ">
-            Education for Childreen
+           <a href="{% url 'singlecouse' couse.slug %}">
+            {{couse.title}}
            </a>
           </h5>
           <p>
-           Lorem ipsum dolor sit amet, consect adipisicing elit. Praesent quos sit.
+           {{couse.subtitle}}
           </p>
           <ul class="list-inline project-conditions mt-20 text-center bg-theme-colored-transparent-1 m-0 p-10">
            <li class="target-fund text-theme-colored">
             <strong>
-             $120,000
+             ${{couse.target}}
             </strong>
             Target
            </li>
@@ -65,7 +66,7 @@
            </li>
            <li class="raised text-theme-colored">
             <strong>
-             $65,000
+             ${{couse.raised}}
             </strong>
             Raised
            </li>
@@ -73,25 +74,8 @@
          </div>
         </div>
         <div class="event-details">
-         <p class="mb-20 mt-20">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat qui ducimus illum modi? Libero saepe perspiciatis accusamus soluta perferendis, ad illum, nesciunt, reiciendis iusto et cupiditate. Repudiandae provident, consectetur, sapiente, libero iure necessitatibus corporis nulla voluptate, quisquam aut eum perspiciatis? Fugiat labore aspernatur eius, perspiciatis ut molestiae, delectus rem.
-         </p>
-         <div class="pull-left flip mr-15">
-          <img alt="" src=" {% static 'images/photos/1.jpg' %} "/>
-         </div>
-         <div class="">
-          <p class="font-14 text-black-light">
-           <em>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nequep aliquid suscipit voluptas ab temporibus, animi impedit ipsum, sunt rem sed ut quod quas earum inventore expedita consectetur.
-           </em>
-          </p>
-          <p class="mt-10">
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat qui ducimus illum modi? Libero saepe perspic reiciendis iusto et cupiditate. Repudiandae provident, consectetur, sapiente, libero iure necessitatibus corporis nulla sit voluptate, quisquam aut eum perspiciatis? Fugiat labore aspernatur
-          </p>
-         </div>
-         <p class="mt-20">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat qui ducimus illum modi? Libero saepe perspiciatis accusamus soluta perferendis, ad illum, nesciunt, reiciendis iusto et cupiditate. Repudiandae provident, consectetur, sapiente, libero iure necessitatibus corporis nulla voluptate, quisquam aut eum perspiciatis? Fugiat labore aspernatur eius, perspiciatis ut molestiae, delectus rem tempora omnis optio odio autem asperiores quae maiores ea eveniet cupiditate aut repellendus? Quo iure explicabo quam reprehenderit ipsam sequi. Perferendis esse iure ullam, illum, quibusdam corporis nobis dolores unde dolorem ipsa quaerat suscipit.
-         </p>
+            
+        {{couse.content|safe}}
         </div>
        </div>
        <div class="col-sm-4 col-md-4 col-lg-4 slide">

@@ -11,7 +11,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                {% for data in fields %}
+                {% for data in fields|slice:":5" %}
                     <th>{{data|title}}</th>
                 {% endfor %}
                     <th>edit</th>
@@ -20,7 +20,7 @@
             <tbody>
                 {% for data in modeldata %}
                 <tr class="">
-                    {% for field in fields %}
+                    {% for field in fields|slice:":5" %}
                     <td>{{data|getattribute:field|slice:':25'}}</td>
                     {% endfor %}
                     <td><a class="btn btn-primary btn-xs mb-3 mr-1" href="{% url 'editdatamodel' appname modelname data.pk 'edit' %}?next={{request.get_full_path}}"><i class="ti-pencil"></i></a>

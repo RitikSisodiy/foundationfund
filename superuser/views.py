@@ -79,6 +79,7 @@ def editmodel(request,appname=None,modelname=None,objectid=None,opration=None):
     if opration == 'add':
         res['form'] = form()
         if request.method == "POST":
+            print(request.POST)
             res['form'] = form(request.POST,request.FILES)
             if res['form'].is_valid():
                 res['form'].save()

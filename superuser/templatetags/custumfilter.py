@@ -27,3 +27,9 @@ def getattribute(value,arg):
 @register.filter(name='split')
 def splitdata(value,args):
     return value.split(args)
+@register.filter(name="getpercent")
+def getpercent(value,arg):
+    value = float(value)
+    arg = float(arg)
+    percent = (arg*100)/value
+    return str(percent)[:5]

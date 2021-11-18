@@ -272,7 +272,7 @@
             if (ele[i].className == '' && ele[i].getAttribute('type') != 'checkbox') {
                 ele[i].setAttribute('class', 'form-control col')
             }
-            if (ele[i].className == 'vTimeField') {
+            if (ele[i].className == 'self.fields[f.name].') {
                 ele[i].setAttribute('type', 'time')
             }
         }
@@ -298,6 +298,10 @@
             }
             if (ele[i].className == 'vDateField') {
                 ele[i].setAttribute('type', 'date')
+                ele[i].setAttribute('class', 'form-control')
+            }
+            if (ele[i].className == 'vDateTime') {
+                ele[i].setAttribute('type', 'datetime-local')
                 ele[i].setAttribute('class', 'form-control')
             }
         }
