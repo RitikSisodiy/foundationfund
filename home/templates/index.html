@@ -3,8 +3,9 @@
 {% block body %}
 <!-- Start main-content -->
 <div class="main-content">
-
-  {% include 'home/component/headerslider.html' with slider=slider %}
+  {% if sliders %}
+  {% include 'home/component/headerslider.html' with slider=sliders %}
+  {% endif %}
 
   <!-- Section: home-boxes -->
   <section class="layer-overlay overlay-theme-colored-8" data-bg-img="images/bg/bg10.jpg">
