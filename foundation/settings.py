@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
-    'sorl.thumbnail',
-    'galleryfield',
     'about',
     'blogs',
     'events',
@@ -50,9 +48,7 @@ INSTALLED_APPS = [
     'gallary',
     'superuser',
 ]
-DJANGO_GALLERY_CONFIG = ...
-from django.conf.global_settings import STATICFILES_FINDERS
-STATICFILES_FINDERS = tuple(STATICFILES_FINDERS) + ("npm.finders.NpmFinder",)
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
