@@ -212,69 +212,9 @@
           </div>
           <div class="col-xs-12 col-sm-6 col-md-4">
             <h3 class="line-bottom border-bottom mt-0">Upcoming Events</h3>
-            <div class="event media sm-maxwidth400 border-bottom mt-5 mb-0 pt-10 pb-15">
-              <div class="row">
-                <div class="col-xs-2 col-md-3 pr-0">
-                  <div class="event-date text-center bg-theme-colored border-1px p-0 pt-10 pb-10 sm-custom-style">
-                    <ul>
-                      <li class="font-28 text-white font-weight-700">28</li>
-                      <li class="font-18 text-white text-center text-uppercase">Feb</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-xs-9 pr-10 pl-10">
-                  <div class="event-content mt-10 p-5 pb-0 pt-0">
-                    <h5 class="media-heading font-16 font-weight-600"><a href="#">Event: Help The Children</a></h5>
-                    <ul class="list-inline font-weight-600 text-gray-dimgray">
-                      <li><i class="fa fa-clock-o text-theme-colored"></i> 5.00 pm - 7.30 pm</li>
-                      <li> <i class="fa fa-map-marker text-theme-colored"></i> 25 Newyork City.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="event media sm-maxwidth400 border-bottom mt-5 mb-0 pt-10 pb-15">
-              <div class="row">
-                <div class="col-xs-2 col-md-3 pr-0">
-                  <div class="event-date text-center bg-theme-colored border-1px p-0 pt-10 pb-10 sm-custom-style">
-                    <ul>
-                      <li class="font-28 text-white font-weight-700">26</li>
-                      <li class="font-18 text-white text-center text-uppercase">OCT</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-xs-9 pr-10 pl-10">
-                  <div class="event-content mt-10 p-5 pb-0 pt-0">
-                    <h5 class="media-heading font-16 font-weight-600"><a href="#">Event: Foods For Poor</a></h5>
-                    <ul class="list-inline font-weight-600 text-gray-dimgray">
-                      <li><i class="fa fa-clock-o text-theme-colored"></i> 6.00 pm - 8.30 pm</li>
-                      <li> <i class="fa fa-map-marker text-theme-colored"></i> 25 Newyork City.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="event media sm-maxwidth400 mt-5 mb-0 pt-10 pb-15">
-              <div class="row">
-                <div class="col-xs-2 col-md-3 pr-0">
-                  <div class="event-date text-center bg-theme-colored border-1px p-0 pt-10 pb-10 sm-custom-style">
-                    <ul>
-                      <li class="font-28 text-white font-weight-700">12</li>
-                      <li class="font-18 text-white text-center text-uppercase">DEC</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-xs-9 pr-10 pl-10">
-                  <div class="event-content mt-10 p-5 pb-0 pt-0">
-                    <h5 class="media-heading font-16 font-weight-600"><a href="#">Event: Save The Water</a></h5>
-                    <ul class="list-inline font-weight-600 text-gray-dimgray">
-                      <li><i class="fa fa-clock-o text-theme-colored"></i> 4.00 pm - 6.00 pm</li>
-                      <li> <i class="fa fa-map-marker text-theme-colored"></i> 25 Newyork City.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% for data in eventlist|slice:":3" %}
+            {% include 'events/component/homeSingleEvent.html' with data=data %}
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -384,103 +324,7 @@
   </section>
 
   <!-- Section: Become a Volunteer -->
-  <section>
-    <div class="container">
-      <div class="section-content">
-        <div class="row">
-          <div class="col-md-6">
-            <h3 class="bg-theme-colored p-15 pl-30 mb-0 text-white">Become a Volunteer</h3>
-            <form id="volunteer_apply_form" class="bg-light p-30 pb-15" name="job_apply_form"
-              action="includes/become-volunteer.php" method="post" enctype="multipart/form-data">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="form_name">Name <small>*</small></label>
-                    <input id="form_name" name="form_name" type="text" placeholder="Enter Name" required=""
-                      class="form-control">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="form_email">Email <small>*</small></label>
-                    <input id="form_email" name="form_email" class="form-control required email" type="email"
-                      placeholder="Enter Email">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="form_sex">Sex <small>*</small></label>
-                    <select id="form_sex" name="form_sex" class="form-control required">
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="form_branch">Choose Branch <small>*</small></label>
-                    <select id="form_branch" name="form_branch" class="form-control required">
-                      <option value="UK">UK</option>
-                      <option value="USA">USA</option>
-                      <option value="Australia">Australia</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="form_message">Message <small>*</small></label>
-                <textarea id="form_message" name="form_message" class="form-control required" rows="3"
-                  placeholder="Your cover letter/message sent to the employer"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="form_attachment">C/V Upload</label>
-                <input id="form_attachment" name="form_attachment" class="file" type="file" multiple
-                  data-show-upload="false" data-show-caption="true">
-              </div>
-              <div class="form-group">
-                <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="" />
-                <button type="submit" class="btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10"
-                  data-loading-text="Please wait...">Apply Now</button>
-              </div>
-            </form>
-            <!-- Job Form Validation-->
-            <script type="text/javascript">
-              $("#volunteer_apply_form").validate({
-                submitHandler: function (form) {
-                  var form_btn = $(form).find('button[type="submit"]');
-                  var form_result_div = '#form-result';
-                  $(form_result_div).remove();
-                  form_btn.before(
-                    '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
-                  );
-                  var form_btn_old_msg = form_btn.html();
-                  form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-                  $(form).ajaxSubmit({
-                    dataType: 'json',
-                    success: function (data) {
-                      if (data.status == 'true') {
-                        $(form).find('.form-control').val('');
-                      }
-                      form_btn.prop('disabled', false).html(form_btn_old_msg);
-                      $(form_result_div).html(data.message).fadeIn('slow');
-                      setTimeout(function () {
-                        $(form_result_div).fadeOut('slow')
-                      }, 6000);
-                    }
-                  });
-                }
-              });
-            </script>
-          </div>
-          <div class="col-md-6 sm-text-center mt-40">
-            <img class="hidden-sm hidden-xs" src="{% static 'images/photos/v1.png' %} " alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
 
   <!-- Section: Testimonials -->
   <section class="divider parallax layer-overlay overlay-dark-9" data-bg-img="images/bg/bg23.jpg"

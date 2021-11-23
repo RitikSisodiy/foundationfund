@@ -12,13 +12,23 @@ def volunteer(request):
     if request.method == "POST":
         resjson = {}
         form = GenForm(VolunteerRegister)
-        form = form(request.POST,request.FILES)
+        updated_request = request.POST.copy()
+        updated_request.update({'status': 'Applied'})
+        form = form(updated_request,request.FILES,)
         if form.is_valid():
-            form.save()
+            # form.save()
+            resjson['status'] = True
             resjson["message"] = "Thanks For Registration We Will Get Back To You Soon :)"
             print("success")
             return JsonResponse(resjson)
-        print(request.POST,request.FILES)
+        else:
+            resjson['status'] = False
+            print(form.errors.as_data())
+            mes = ""
+            for data in form.errors:
+                mes+= str(form.errors[data]).replace('This',data)
+            resjson['message'] = mes
+            return JsonResponse(resjson)
         pass
     return render(request,'about/volunteer.html')
 
