@@ -327,6 +327,10 @@
             dTable.search($(this).val())
         .draw(); // this  is for customized searchbox with datatable search feature.
         })
+        $("a.related-widget-wrapper-link").on('click',function(){
+             window.open(this.href, "yyyyy", "width=480,height=360,resizable=no,toolbar=no,menubar=no,location=no,status=no");
+            return false
+        })
     </script>
 
 </body>

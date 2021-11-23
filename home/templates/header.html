@@ -78,7 +78,13 @@
                   
                 </li>
                 {% url 'blogs' as blogsurl %}
-                <li class="{% if blogsurl == request.path %}active{% endif %}"><a href="{{blogsurl}}">Blog</a>
+                {% url 'news' as newsurl %}
+                <li class="{% if blogsurl == request.path %}active{% endif %}"><a href="">Blog</a>
+                <ul class="dropdown">
+                    <li><a href= "{{blogsurl}}"> Blog </a></li>
+                    <li><a href="{{newsurl}}"> News </a></li>
+                   
+                  </ul>
                 </li>
                 {% url 'couses' as cousesurl %}
                 <li class="{% if cousesurl == request.path %}active{% endif %}"><a href="{{cousesurl}}">Couses</a>

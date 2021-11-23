@@ -2,7 +2,10 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from .models import about
-from django.contrib.admin import widgets
+from django.contrib.admin import (
+      widgets,
+      site as admin_site
+    )
 
 def GenForm(Model,listHiddenfield=[]):
     data = {field:forms.HiddenInput() for field in listHiddenfield}
@@ -16,6 +19,19 @@ def GenForm(Model,listHiddenfield=[]):
             for f in Model._meta.fields:
                 if "DateTimeField" in str(type(f)):
                     print('DateTimeField is present',f.name)
-                    self.fields[f.name].widget.attrs['class'] = 'vDateTime'
-            
-    return newform
+                    try:
+                        self.fields[f.name].widget.attrs['class'] = 'vDateTime'
+                    except Exception:
+                        pass
+                if "ForeignKey" in str(type(f)):
+                    print('ForeignKey is present',f.name)
+                    try:
+                        self.fields[f.name].widget  = widgets.RelatedFieldWidgetWrapper(
+                        self.fields[f.name].widget,
+                        self.instance._meta.get_field(f.name).remote_field,
+                        admin_site
+                    )
+                    except Exception:
+                        pass 
+                           
+    return newform  

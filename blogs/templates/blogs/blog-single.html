@@ -11,7 +11,7 @@
        <div class="row">
         <div class="col-md-12">
          <h3 class="title text-white">
-          Single Post
+          {{blogob.title}}
          </h3>
         </div>
        </div>
@@ -27,7 +27,7 @@
          <article class="post clearfix mb-0">
           <div class="entry-header">
            <div class="post-thumb thumb">
-            <img alt="" class="img-responsive img-fullwidth" src=" {% static 'images/bg/bg2.jpg' %} "/>
+            <img alt="" class="img-responsive img-fullwidth" src="{{blogob.img.url}} "/>
            </div>
           </div>
           <div class="entry-content">
@@ -35,10 +35,11 @@
             <div class="entry-date media-left text-center flip bg-theme-colored pt-5 pr-15 pb-5 pl-15">
              <ul>
               <li class="font-16 text-white font-weight-600">
-               28
-              </li>
-              <li class="font-12 text-white text-uppercase">
-               Feb
+                                {{blogob.time|date:"d"}}
+
+              </li><li class="font-12 text-white text-uppercase">
+                {{blogob.time|date:"M"}}
+
               </li>
              </ul>
             </div>
@@ -46,7 +47,7 @@
              <div class="event-content pull-left flip">
               <h4 class="entry-title text-white text-uppercase m-0">
                <a href="#">
-                Post title here
+                {{blogon.title}}
                </a>
               </h4>
               <span class="mb-10 text-gray-darkgray mr-10 font-13">
@@ -62,26 +63,7 @@
              </div>
             </div>
            </div>
-           <p class="mb-15">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-           </p>
-           <p class="mb-15">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-           </p>
-           <blockquote class="theme-colored pt-20 pb-20">
-            <p>
-             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-            </p>
-            <footer>
-             Someone famous in
-             <cite title="Source Title">
-              Source Title
-             </cite>
-            </footer>
-           </blockquote>
-           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna et sed aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-           </p>
+           {{blogob.content|safe}}
            <div class="mt-30 mb-0">
             <h5 class="pull-left mt-10 mr-20 text-theme-colored">
              Share:
