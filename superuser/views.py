@@ -9,6 +9,7 @@ from .dashboardsettings import appmodels , appslist , getObjectbyAppModelName , 
 from django.core import serializers
 from .forms import GenForm
 from django.contrib.auth import logout
+from superuser.dashboardsettings import exclude as excludeapps
 # from django.apps import apps
 # from onlineshop.models import *
 # from django.contrib import messages
@@ -52,22 +53,25 @@ def index(request):
     # for app in allapps:
     #     res.append({app:apps.all_models[app]})
     return render(request,'superuser/index.html',res)
+
 def showmodels(request,appname):
     res = {}
     res['modelname'] ="Home"
     res['appname'] =appname
     res['models'] = getmodelbyappname(appname)
     return render(request,'superuser/listmodels.html',res)
+
 def showObject(request,appname,modelname):
     res = {}
     mymodel = getObjectbyAppModelName(appname,modelname)
     res['modeldata'] = mymodel.objects.all()
-    res['fields'] = [f.name for f in mymodel._meta.fields]
+    res['fields'] = [[f.name,str(type(f))] for f in mymodel._meta.fields]
     # res['fields'] = [f.name for f in mymodel._meta.get_fields()]
     res['modeldata'] = mymodel.objects.all()
     res['appname'] =appname
     res['modelname'] =modelname
     return render(request , 'superuser/modeldatatable.html' ,res)
+from .dashboardsettings import showRelatedOnEditPage
 def editmodel(request,appname=None,modelname=None,objectid=None,opration=None):
     res = {}
     mymodel = getObjectbyAppModelName(appname,modelname)
@@ -87,6 +91,8 @@ def editmodel(request,appname=None,modelname=None,objectid=None,opration=None):
                 return redirect(request.get_full_path())
             messages.error(request,str(getobjecturl(res['form'].instance)) + " data is invalid Check your form")
     elif opration == 'edit':
+        if f"{appname}.{modelname}" in showRelatedOnEditPage:
+            res['showrelated'] = True
         res['form'] = form(instance=singledata)
         res['relateddata'] = type(singledata)._meta.related_objects
         res['appname'] = appname
@@ -128,7 +134,7 @@ def relatedmodel(request,appname=None,modelname=None,objectid=None,relatedfield=
         else:
             messages.error(request,'Invalid data please cheack your form')
     if relmodel is not None:
-        res['fields'] = [f.name for f in relmodel._meta.fields]
+        res['fields'] = [[f.name,str(type(f))] for f in relmodel._meta.fields]
     res['appname'] = appname
     res['modelname'] = modelname
     res['objectid'] = objectid
@@ -163,6 +169,12 @@ def Logout(request):
     except Exception as e:
         return redirect('home')
     return redirect('home')
+
+
+
+
+
+
 # def allproducts(request):
 #     prods = Product.objects.all()
 #     return render(request,'superuser/products.html',{'prods':prods,'title':"View Product"})

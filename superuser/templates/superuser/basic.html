@@ -301,6 +301,7 @@
                 ele[i].setAttribute('class', 'form-control')
             }
             if (ele[i].className == 'vDateTime') {
+                ele[i].setAttribute('value', ele[i].value.replace(" ","T"))
                 ele[i].setAttribute('type', 'datetime-local')
                 ele[i].setAttribute('class', 'form-control')
             }

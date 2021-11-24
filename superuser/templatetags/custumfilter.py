@@ -33,3 +33,6 @@ def getpercent(value,arg):
     arg = float(arg)
     percent = (arg*100)/value
     return str(percent)[:5]
+@register.filter(name="showrelated")
+def showrelated(value,args):
+    return "showing related"
