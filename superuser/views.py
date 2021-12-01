@@ -5,7 +5,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from .custumfunction import getobjecturl
 from superuser.templatetags.custumfilter import sidebardata
-from .dashboardsettings import appmodels , appslist , getObjectbyAppModelName , getmodelbyappname
+from .dashboardsettings import hiddenFieldInAdminAllModel,appmodels , appslist , getObjectbyAppModelName , getmodelbyappname
 from django.core import serializers
 from .forms import GenForm
 from django.contrib.auth import logout
@@ -75,7 +75,7 @@ from .dashboardsettings import showRelatedOnEditPage
 def editmodel(request,appname=None,modelname=None,objectid=None,opration=None):
     res = {}
     mymodel = getObjectbyAppModelName(appname,modelname)
-    form = GenForm(mymodel,['slug'])
+    form = GenForm(mymodel,hiddenFieldInAdminAllModel)
     res['appname'] =appname
     res['modelname'] =modelname
     if objectid is not None and objectid != "newmodel":

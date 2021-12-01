@@ -48,3 +48,25 @@ class Couses(models.Model):
         super(Couses, self).save(*args, **kwargs)
     def __str__(self):
         return str(self.title)
+
+
+class donation(models.Model):
+    order_id = models.CharField(unique=True, max_length=100, null=True, blank=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    ammount = models.CharField(max_length=50)
+    couse = models.ForeignKey(Couses,on_delete=models.CASCADE,related_name="donations")
+    currency = models.CharField(max_length=10)
+    transactionid = models.CharField(max_length=50)
+    time = models.DateTimeField(auto_now=True)
+    def __str__(self):
+    	if self.transactionid == 'NO transaction':
+    		return self.first_name + "(Pending)"
+    	else:
+    		return self.first_name + "(success)"
+    def save(self, *args, **kwargs):
+        if self.order_id is None and self.time and self.id:
+            self.order_id = self.time.strftime('PAY2ME%Y%m%dODR') + str(self.id)
+        return super().save(*args, **kwargs)
+

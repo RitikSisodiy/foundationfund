@@ -36,7 +36,10 @@ showRelatedOnEditPage=(
     'gallary.Gallery',
 )
 
+hiddenFieldInAdminAllModel = ['slug','PostUrl']
+
 for data in INSTALLED_APPS:
     if '.' not in data and data not in exclude:
         appslist.append(data)
 appslist.insert(0,'auth')
+appslist.append('ipn')

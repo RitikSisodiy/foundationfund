@@ -28,4 +28,5 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('gallary/', include('gallary.urls')),
     path('shop/', include('shop.urls')),
+    path('paypal/', include('paypal.standard.ipn.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
