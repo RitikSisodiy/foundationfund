@@ -100,4 +100,4 @@ def payment_done(request):
 @csrf_exempt
 def payment_canceled(request):
     response = verifyPayPalPayment(request.session["orderid"])
-    return render(request, 'couses/payment_cancelled.html',{"response",response})
+    return render(request, 'couses/payment_cancelled.html',{"response":response})
