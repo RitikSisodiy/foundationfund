@@ -5,7 +5,6 @@ from .paytm import Checksum
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 from paypal.standard.models import PayPalStandardBase
-from paypal.standard.models import p
 # Create your views here.
 from django.urls import reverse
 def getPaytmParam(request,orderid:str,ammount:float,cust_id:str,callbackpathname:str,currency:str):
