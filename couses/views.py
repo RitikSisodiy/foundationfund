@@ -94,7 +94,7 @@ def paypalHandler(request,slug):
 @csrf_exempt
 def payment_done(request):
     response = verifyPayPalPayment(request.session["orderid"])
-    return render(request, 'couses/payment_done.html',{"response",response})
+    return render(request, 'couses/payment_done.html',{"response":response})
 
 
 @csrf_exempt
