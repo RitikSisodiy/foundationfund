@@ -1,10 +1,19 @@
-from django.http import request
+from django.http import request, response
 from django.shortcuts import render
 from . models import *
 from paytm import Checksum
+import requests
 from django.views.decorators.csrf import csrf_exempt
-from paymentintigration.views import getPaytmParam,verifyPaymentRequest,PaypalParam
+from paymentintigration.views import getPaytmParam,verifyPaymentRequest,PaypalParam,verifyPayPalPayment
 # Create your views here.
+def ConvertCurrency(currency,Ccod,convTo):
+    conQry = f"{Ccod}_{convTo}"
+    url = f"https://free.currconv.com/api/v7/convert?q={conQry}&compact=ultra&apiKey=afcd25a222160e9a3bcb"
+    data = requests.get(url)
+    js = data.json()[conQry]
+    covAmount = float(js)*float(currency)
+    return covAmount
+
 def couses(request,slug=None):
     res= {}
     if slug is not None:
@@ -72,16 +81,20 @@ def paypalHandler(request,slug):
         currency=request.POST['currency_code']
         # ammount=float(request.POST['selamount'])
         ammount = request.POST['amount']
+        ammount = ConvertCurrency(ammount,currency,"USD")
         couseob = Couses.objects.get(slug=slug)
         Donation = donation.objects.create(first_name = fname, last_name = lname,  email= email , ammount = ammount,  couse = couseob , currency=currency,transactionid = 'NO transaction')
         Donation.save()
-        paypal_dict ,form  = PaypalParam(request,Donation.order_id,Donation.email,Donation.ammount)
+        request.session["orderid"] =  Donation.order_id
+        paypal_dict ,form  = PaypalParam(request,Donation.order_id,Donation.email,Donation.ammount,currency)
         return render(request, 'couses/process_payment.html', {'order': Donation, 'form': form})
 @csrf_exempt
 def payment_done(request):
-    return render(request, 'couses/payment_done.html')
+    response = verifyPayPalPayment(request.session["orderid"])
+    return render(request, 'couses/payment_done.html',{"response",response})
 
 
 @csrf_exempt
 def payment_canceled(request):
-    return render(request, 'couses/payment_cancelled.html')
+    response = verifyPayPalPayment(request.session["orderid"])
+    return render(request, 'couses/payment_cancelled.html',{"response",response})

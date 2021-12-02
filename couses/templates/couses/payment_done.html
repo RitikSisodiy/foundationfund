@@ -1,7 +1,36 @@
 {% extends 'basic.html' %}
-
+{% load static %}
 {% block body %}
 
-    <p>Payment done.</p>
+<section class="bg-lightest fullscreen" id="home">
+    <div class="display-table text-center">
+        <div class="display-table-cell">
+            <div class="container pt-0 pb-0">
+                <div class="row">
+                    {% if response.RESPCODE == "01" %}
+                    <div class="col-md-10 col-md-offset-1">
+                        <h1 class="text-theme-colored font-weight-300 font-64">
+                            <i class="fa fa-check-circle"></i><br>
+                            Thanks
+                        </h1>
+                        <div class="ClassyCountdownDemo" id="countdown17">
+                        </div>
 
+                        <p class="font-20">
+
+
+                            <br />
+                            Your donation has been processed</br>
+                            100% of your money will fund use for People in Need
+                        </p>
+                        <p>
+                        {{response}}
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

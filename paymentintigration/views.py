@@ -4,6 +4,8 @@ from .models import PaytmConfig
 from .paytm import Checksum
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
+from paypal.standard.models import PayPalStandardBase
+from paypal.standard.models import p
 # Create your views here.
 from django.urls import reverse
 def getPaytmParam(request,orderid:str,ammount:float,cust_id:str,callbackpathname:str,currency:str):
@@ -41,7 +43,7 @@ def verifyPaymentRequest(request):
 
 
 
-def PaypalParam(request,order_id,order_name,ammount):
+def PaypalParam(request,order_id,order_name,ammount,currency):
     host = "https://" if request.is_secure() else "http://"
     host += request.get_host()
 
@@ -60,3 +62,5 @@ def PaypalParam(request,order_id,order_name,ammount):
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return paypal_dict,form
+def verifyPayPalPayment(orderid):
+    return PayPalStandardBase.objects.get(invoice=orderid).__dict__
