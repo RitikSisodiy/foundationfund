@@ -7,13 +7,15 @@ from django.views.decorators.csrf import csrf_exempt
 from paymentintigration.views import getPaytmParam,verifyPaymentRequest,PaypalParam,verifyPayPalPayment
 # Create your views here.
 def ConvertCurrency(currency,Ccod,convTo):
-    conQry = f"{Ccod}_{convTo}"
-    url = f"https://free.currconv.com/api/v7/convert?q={conQry}&compact=ultra&apiKey=afcd25a222160e9a3bcb"
-    data = requests.get(url)
-    js = data.json()[conQry]
-    covAmount = float(js)*float(currency)
-    return covAmount
-
+    try:
+        conQry = f"{Ccod}_{convTo}"
+        url = f"https://free.currconv.com/api/v7/convert?q={conQry}&compact=ultra&apiKey=afcd25a222160e9a3bcb"
+        data = requests.get(url)
+        js = data.json()[conQry]
+        covAmount = float(js)*float(currency)
+        return covAmount
+    except Exception as e:
+        return None
 def couses(request,slug=None):
     res= {}
     if slug is not None:
@@ -81,7 +83,8 @@ def paypalHandler(request,slug):
         currency=request.POST['currency_code']
         # ammount=float(request.POST['selamount'])
         ammount = request.POST['amount']
-        ammount = ConvertCurrency(ammount,currency,"USD")
+        cammount = ConvertCurrency(ammount,currency,"USD")
+        ammount = cammount if cammount is not None else ammount
         couseob = Couses.objects.get(slug=slug)
         Donation = donation.objects.create(first_name = fname, last_name = lname,  email= email , ammount = ammount,  couse = couseob , currency=currency,transactionid = 'NO transaction')
         Donation.save()
