@@ -10,7 +10,7 @@
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-backdrop='static'
                     data-keyboard='false'>+Add New {{currentmodelname|title}} </button>
             </div>
-           {% include 'superuser/componets/datatable.html' with modeldata=availbledata fields=fields %}
+           {% include 'superuser/componets/datatable.html' with modeldata=availbledata fields=fields appname=currentappname modelname=currentmodelname %}
             
         </div>
     </div>
