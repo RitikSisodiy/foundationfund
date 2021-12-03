@@ -29,6 +29,18 @@ def couses(request,slug=None):
 
 def paymenthandler(request,slug=None):
     if request.method=="POST":
+        mode = request.POST['paymentmode']
+        if mode == 'paypal':
+            return paypalHandler(request,slug)
+        if mode == 'paytm':
+            return paytmHandler(request,slug)
+
+    # items = charityblog.objects.get(id = num)
+    # pers = str((float(items.blog_raised)*100)/float(items.blog_goal))[:4]
+    # return render(request , 'donation/payment.html',{'blog':items,'per':pers})
+
+def paytmHandler(request,slug=None):
+    if request.method=="POST":
         fname=request.POST['fname']
         lname=request.POST['lname']
         email=request.POST['email']
@@ -41,9 +53,8 @@ def paymenthandler(request,slug=None):
         param_dict,renderhtml =  getPaytmParam(request,Donation.order_id,ammount,email,'handle',currency)
         print(param_dict)
         return renderhtml
-    # items = charityblog.objects.get(id = num)
-    # pers = str((float(items.blog_raised)*100)/float(items.blog_goal))[:4]
-    # return render(request , 'donation/payment.html',{'blog':items,'per':pers})
+
+
 @csrf_exempt
 def hendlerequest(request):
     if request.method =='POST':

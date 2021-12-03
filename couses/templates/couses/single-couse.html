@@ -453,6 +453,17 @@
             </div>
            </div>
 
+           <div class="col-sm-12">
+            <div class="form-group mb-20">
+             <label>
+              <strong>
+               Select the Payment Method
+              </strong>
+             </label><br>
+             <input type="radio" name="paymentmode" id="paypal" value="paypal"> <label for="paypal"><img   class="btn " src="/static/trasparentpaypal.png" width="190px" name="submit" alt="Donate Now"></label><br>
+             <input type="radio" name="paymentmode" id="paytm" value="paytm"> <label for="paytm"><img  class="btn " src="/static/transparentpaytm.png" width="190px" name="submit" alt="Donate Now"></label>
+            </div>
+           </div>
 
            <div class="col-sm-12">
             <div class="form-group">
@@ -612,7 +623,7 @@
           <input name="bn" type="hidden" value="PP-DonationsBF"/>
           <input name="return" type="hidden" value="http://www.yoursite.com/thankyou.html"/>
           <input name="cancel_return" type="hidden" value="http://www.yoursite.com/paymentcancel.html"/>
-          <input name="notify_url" {% static ' type=' %} "hidden" value="http://www.yoursite.com/notifypayment.php"/>
+          <input name="notify_url" type="hidden" value="http://www.yoursite.com/notifypayment.php"/>
           <input name="submit" type="submit"/>
          </form>
          <!-- Paypal Recurring Form -->
@@ -629,7 +640,7 @@
           <!-- updated dynamically -->
           <input name="p3" type="hidden" value="1"/>
           <input name="rm" type="hidden" value="2"/>
-          <input name="src"  {% static 'type="hidden"' %}  value="1"/>
+          <input name="src" type="hidden"  value="1"/>
           <input name="sra" type="hidden" value="1"/>
           <input name="no_shipping" type="hidden" value="0"/>
           <input name="no_note" type="hidden" value="1"/>
@@ -637,7 +648,7 @@
           <input name="bn" type="hidden" value="PP-DonationsBF"/>
           <input name="return" type="hidden" value="http://www.yoursite.com/thankyou.html"/>
           <input name="cancel_return" type="hidden" value="http://www.yoursite.com/paymentcancel.html"/>
-          <input name="notify_url" {% static ' type=' %} "hidden" value="http://www.yoursite.com/notifypayment.php"/>
+          <input name="notify_url" type="hidden" value="http://www.yoursite.com/notifypayment.php"/>
           <input name="submit" type="submit"/>
          </form>
          <!-- ===== END: Paypal Both Onetime/Recurring Form ===== -->
