@@ -15,5 +15,5 @@ def payment_notification(sender, **kwargs):
             order.transactionid = ipn.txn_id
             order.save()
             Blog = Couses.objects.get(id = order.couse.id)
-            Blog.raised = float(Blog.raised) + float(donation.ammount)
+            Blog.raised = float(Blog.raised) + float(order.ammount)
             Blog.save()
