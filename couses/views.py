@@ -1,4 +1,5 @@
-from django.http import request, response
+from django.http import request, JsonResponse
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from . models import *
 from paytm import Checksum
@@ -93,11 +94,20 @@ def paypalHandler(request,slug):
         return render(request, 'couses/process_payment.html', {'order': Donation, 'form': form})
 @csrf_exempt
 def payment_done(request):
-    response = verifyPayPalPayment(request.session["orderid"])
-    return render(request, 'couses/payment_done.html',{"response":response})
-
+    try:
+        response = verifyPayPalPayment(request.session["orderid"])
+        return render(request, 'couses/payment_done.html',{'response':response})
+    except Exception as e:
+        response = donation.objects.get(order_id =  request.session['orderid']).__dict__
+        return render(request, 'couses/payment_done.html',{'response':response})
+def getpaypalPaymentStatus(request):
+    try:
+        response = verifyPayPalPayment(request.session["orderid"])
+        return JsonResponse(response,status=200)
+    except Exception as e:
+        return JsonResponse({},status=404)
+ 
 
 @csrf_exempt
 def payment_canceled(request):
-    response = verifyPayPalPayment(request.session["orderid"])
-    return render(request, 'couses/payment_cancelled.html',{"response":response})
+    return render(request, 'couses/payment_cancelled.html',{})
