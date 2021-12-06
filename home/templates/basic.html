@@ -12,7 +12,7 @@
   <meta name="author" content="ThemeMascot" />
 
   <!-- Page Title -->
-  <title>{{title}}</title>
+  <title>{{title|title}}</title>
 
   <!-- Favicon and Touch Icons -->
   {% block css %}{% endblock %}
@@ -48,7 +48,26 @@
 
   <!-- CSS | Theme Color -->
   <link href="{% static 'css/colors/theme-skin-orange.css' %} " rel="stylesheet" type="text/css">
-
+  <style>
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+img {
+ -moz-user-select: none;
+ -webkit-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+ -webkit-user-drag: none;
+ user-drag: none;
+ -webkit-touch-callout: none;
+}
+  </style>
   <!-- external javascripts -->
   <script src="{% static 'js/jquery-2.2.4.min.js' %} "></script>
   <script src="{% static 'js/jquery-ui.min.js' %} "></script>

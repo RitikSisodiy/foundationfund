@@ -1,10 +1,11 @@
 from django.apps import config
 from django.shortcuts import render
-from .models import PaytmConfig
+from .models import PaytmConfig, rozpayConfig
 from .paytm import Checksum
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 from paypal.standard.ipn.models import PayPalIPN
+import razorpay
 # Create your views here.
 from django.urls import reverse
 def getPaytmParam(request,orderid:str,ammount:float,cust_id:str,callbackpathname:str,currency:str):
@@ -63,3 +64,8 @@ def PaypalParam(request,order_id,order_name,ammount,currency):
     return paypal_dict,form
 def verifyPayPalPayment(orderid):
     return PayPalIPN.objects.get(invoice=orderid).__dict__
+
+def getRozorpayClient():
+    config = rozpayConfig.objects.get(activate=True)
+    return razorpay.Client(
+    auth=(config.RAZOR_KEY_ID, config.RAZOR_KEY_SECRET)),config

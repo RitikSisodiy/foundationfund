@@ -18,3 +18,15 @@ class PaytmConfig(models.Model):
             data.update(activate=False)
         self.PostUrl = self.production if self.WEBSITE == '2' else self.stage
         super(PaytmConfig, self).save(*args, **kwargs)
+class rozpayConfig(models.Model):
+    title = models.CharField(max_length=100,help_text='add mode for example "( testing config )" ')
+    activate = models.BooleanField(help_text=":- check to activate",default=False)
+    RAZOR_KEY_ID = models.CharField(max_length=200)
+    RAZOR_KEY_SECRET = models.CharField(max_length=200)
+    def __str__(self):
+        return self.title
+    def save(self, *args, **kwargs):
+        if self.activate:
+            data=rozpayConfig.objects.all().exclude(id=self.id)
+            data.update(activate=False)
+        super(rozpayConfig, self).save(*args, **kwargs)

@@ -32,6 +32,12 @@ def GenForm(Model,listHiddenfield=[]):
                         admin_site
                     )
                     except Exception:
+                        pass
+                if "ManyToManyField" in str(type(f)):
+                    print('ManyToManyField is present',f.name)
+                    try:
+                        pass
+                    except Exception:
                         pass 
                            
     return newform  
