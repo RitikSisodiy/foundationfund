@@ -158,15 +158,15 @@
           <div class="gallery-item design">
            <div class="thumb">
             <div class="flexslider-wrapper">
-             <div class="flexslider">
-              <ul class="slides">
+             <div class="flexslider" style="height:250px">
+              <ul class="slides" >
               {% for img in data.Image.all %}
-               <li>
+               <li >
                 <a href="{{img.img.url}}" title="{{data.title}}">
                  <img alt="" src="{{img.img.url}} "/>
                 </a>
                </li>
-             {% endfor %}
+               {% endfor %}
               </ul>
              </div>
             </div>

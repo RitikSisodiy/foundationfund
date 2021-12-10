@@ -30,3 +30,15 @@ class rozpayConfig(models.Model):
             data=rozpayConfig.objects.all().exclude(id=self.id)
             data.update(activate=False)
         super(rozpayConfig, self).save(*args, **kwargs)
+class paypalConfig(models.Model):
+    title = models.CharField(max_length=100,help_text='add mode for example "( testing config )" ')
+    RECEIVER_EMAIL = models.CharField(max_length=100)
+    test = models.BooleanField(help_text=":- check If you want to test payment method",default=False)
+    activate = models.BooleanField(help_text=":- check to activate",default=False)
+    def __str__(self):
+        return self.title
+    def save(self, *args, **kwargs):
+        if self.activate:
+            data=paypalConfig.objects.all().exclude(id=self.id)
+            data.update(activate=False)
+        super(paypalConfig, self).save(*args, **kwargs)

@@ -72,7 +72,7 @@ def paymenthandler(request,slug=None):
 def paytmHandler(request,slug=None):
     if request.method=="POST":
         Donation = genrateOrder(request,slug)
-        param_dict,renderhtml =  getPaytmParam(request,Donation.order_id,ammount,email,'handle',currency)
+        param_dict,renderhtml =  getPaytmParam(request,Donation.order_id,Donation.ammount,Donation.email,'handle',Donation.currency)
         print(param_dict)
         return renderhtml
 
@@ -115,7 +115,7 @@ def paypalHandler(request,slug):
      if request.method=="POST":
         Donation = genrateOrder(request,slug)
         request.session["orderid"] =  Donation.order_id
-        paypal_dict ,form  = PaypalParam(request,Donation.order_id,Donation.email,Donation.ammount,currency)
+        paypal_dict ,form  = PaypalParam(request,Donation.order_id,Donation.email,Donation.ammount,Donation.currency)
         return render(request, 'couses/process_payment.html', {'order': Donation, 'form': form})
 @csrf_exempt
 def payment_done(request):

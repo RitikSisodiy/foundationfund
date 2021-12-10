@@ -1,6 +1,6 @@
 from django.apps import config
 from django.shortcuts import render
-from .models import PaytmConfig, rozpayConfig
+from .models import PaytmConfig, rozpayConfig , paypalConfig
 from .paytm import Checksum
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
@@ -46,9 +46,10 @@ def verifyPaymentRequest(request):
 def PaypalParam(request,order_id,order_name,ammount,currency):
     host = "https://" if request.is_secure() else "http://"
     host += request.get_host()
-
+    config = paypalConfig.objects.get(activate=True)
+    settings.PAYPAL_TEST = config.test
     paypal_dict = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'business': config.RECEIVER_EMAIL,
         'amount': ammount,
         'item_name': order_name,
         'invoice': order_id,
